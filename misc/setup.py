@@ -21,7 +21,8 @@ def get_version():
         # If file ../src/version.cc is not available (we are installing from source distribution),
         # look up the previously generated version.py
         version_globals = {}
-        execfile(os.path.join(os.path.dirname(__file__), "version.py"), version_globals)
+        with open(os.path.join(os.path.dirname(__file__), "version.py")) as version_file:
+            exec(version_file.read(), version_globals)
         version = version_globals["__version__"]
     else:
         # If version was parsed from ../src/version.cc, write it to version.py (see use above)
