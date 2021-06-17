@@ -2,7 +2,6 @@
 
 from distutils.core import setup
 import os
-import string
 import re
 
 
@@ -11,7 +10,7 @@ def get_version():
     try:
         # First try to parse version from ../src/version.cc
         with open(os.path.join(os.path.dirname(__file__), "..", "src", "version.cc")) as f:
-            for line in map(string.strip, f.readlines()):
+            for line in map(str.strip, f.readlines()):
                 m = re.match("const char\* kNinjaVersion = \"(\d+\.\d+\.\d+)\..+\";", line)
                 if m:
                     version = m.group(1)
