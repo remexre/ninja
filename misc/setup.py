@@ -11,7 +11,7 @@ def get_version():
         # First try to parse version from ../src/version.cc
         with open(os.path.join(os.path.dirname(__file__), "..", "src", "version.cc")) as f:
             for line in map(str.strip, f.readlines()):
-                m = re.match("const char\* kNinjaVersion = \"(\d+\.\d+\.\d+)\..+\";", line)
+                m = re.match("const char\* kNinjaVersion = \"(\d+\.\d+\.\d+(?:\..+)?)\";", line)
                 if m:
                     version = m.group(1)
     except IOError:
@@ -28,7 +28,6 @@ def get_version():
         with open(os.path.join(os.path.dirname(__file__), "version.py"), "w") as f:
             f.write("__version__ = \"" + version + "\"")
     return version
-
 
 setup(
     name="ninja_syntax",
